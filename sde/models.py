@@ -67,6 +67,11 @@ class System(models.Model):
             return distance
 
 
+class SystemJump(models.Model):
+    origin = models.ForeignKey(System, related_name="jumps_origin")
+    destination = models.ForeignKey(System, related_name="jumps_destination")
+
+
 # Types
 class MarketGroup(models.Model):
     id = models.IntegerField(primary_key=True)

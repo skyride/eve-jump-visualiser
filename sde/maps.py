@@ -40,6 +40,11 @@ System = [
     ('security_class', 'securityClass')
 ]
 
+SystemJump = [
+    ("origin_id", "fromSolarSystemID"),
+    ("destination_id", "toSolarSystemID")
+]
+
 
 MarketGroup = [
     ('id', 'marketGroupID'),
