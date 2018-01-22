@@ -18,7 +18,10 @@ def render_map(jumps, filepath, scale=1):
         origin=Max('origin_jumps'),
         dest=Max('dest_jumps')
     )
-    colour_scale = math.sqrt(256 / max(colour_scale['origin'], colour_scale['dest']))
+    colour_scale = max(colour_scale['origin'], colour_scale['dest'])
+    print(colour_scale)
+    colour_scale = 4000
+    colour_scale = math.sqrt(256 / colour_scale)
 
     # Draw image
     base_x = 4800 * scale
@@ -50,7 +53,9 @@ def render_map(jumps, filepath, scale=1):
                 jump.destination.x * plot_scale + x_offset,
                 (jump.destination.z * -1) * plot_scale + y_offset
             ),
-            fill=virdis[fill],
+            fill=virdis[
+                min(fill, 255)
+            ],
             width=int(fill / (24 / scale))
         )
     del draw

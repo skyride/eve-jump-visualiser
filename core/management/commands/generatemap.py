@@ -2,7 +2,7 @@ import math
 from datetime import timedelta
 
 from django.core.management.base import BaseCommand
-from django.db.models import Q, Sum, Count, Max
+from django.db.models import Q, Sum, Count, Max, F
 
 from sde.models import System, SystemJump
 from core.models import JumpsRecord
@@ -19,7 +19,6 @@ class Command(BaseCommand):
 
         run = True
         while run:
-            print(target)
             jumps = SystemJump.objects.filter(
                 origin__jumps__date__range=[
                     target,
@@ -41,4 +40,5 @@ class Command(BaseCommand):
                 render_map(jumps, filename, scale=3)
                 target = target + timedelta(hours=1)
             else:
+                print "No datapoints found for target %s" % target
                 target = target + timedelta(hours=1)
