@@ -40,5 +40,5 @@ class Command(BaseCommand):
                 render_map(jumps, filename, scale=3)
                 target = target + timedelta(hours=1)
             else:
-                print "No datapoints found for target %s" % target
+                print("No datapoints found for target %s" % target)
                 target = target + timedelta(hours=1)
