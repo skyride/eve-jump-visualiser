@@ -14,12 +14,12 @@ def render_map(jumps, filepath, scale=1, text=None):
         'destination'
     )
 
-    colour_scale = jumps.aggregate(
-        origin=Max('origin_jumps'),
-        dest=Max('dest_jumps')
-    )
-    colour_scale = max(colour_scale['origin'], colour_scale['dest'])
-    print(colour_scale)
+    #colour_scale = jumps.aggregate(
+    #    origin=Max('origin_jumps'),
+    #    dest=Max('dest_jumps')
+    #)
+    #colour_scale = max(colour_scale['origin'], colour_scale['dest'])
+    #print(colour_scale)
     colour_scale = 4000
     colour_scale = math.sqrt(256 / colour_scale)
 
