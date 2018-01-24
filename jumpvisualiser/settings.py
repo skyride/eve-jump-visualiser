@@ -77,9 +77,10 @@ WSGI_APPLICATION = 'jumpvisualiser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
         'NAME': 'jumps',
-	'USER': 'jumps',
-	'PASSWORD': 'YRlifR9w8g',
+        'USER': 'jumps',
+        'PASSWORD': 'YRlifR9w8g',
     },
     'sde': {
         'ENGINE': 'django.db.backends.sqlite3',

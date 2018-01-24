@@ -32,7 +32,7 @@ class Command(BaseCommand):
             )
 
             if jumps.count() > 0:
-                filename = "map-%s.png" % target.strftime('%Y%m%d-%H%M')
+                #filename = "map-%s.png" % target.strftime('%Y%m%d-%H%M')
                 filename = "map%05d.png" % i
                 print(
                     "Rendering file %s from %s datapoints..." % (
@@ -40,7 +40,12 @@ class Command(BaseCommand):
                         jumps.count()
                     )
                 )
-                render_map(jumps, filename, scale=3)
+                render_map(
+                    jumps,
+                    filename,
+                    scale=3,
+                    text=target.strftime('%Y/%m/%d %H:00')
+                )
                 target = target + timedelta(hours=1)
             else:
                 print("No datapoints found for target %s" % target)

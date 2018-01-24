@@ -1,5 +1,5 @@
 import math
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from django.db.models import Sum, Max
 
@@ -8,7 +8,7 @@ from core.colormap import getVirdis
 
 virdis = getVirdis()
 
-def render_map(jumps, filepath, scale=1):
+def render_map(jumps, filepath, scale=1, text=None):
     jumps = jumps.prefetch_related(
         'origin',
         'destination'
@@ -36,6 +36,7 @@ def render_map(jumps, filepath, scale=1):
     )
     draw = ImageDraw.Draw(im)
 
+    # Jumps
     for jump in jumps:
         fill = int(
             math.sqrt(
@@ -58,8 +59,25 @@ def render_map(jumps, filepath, scale=1):
             ],
             width=int(fill / (24 / scale))
         )
+
+    # Text
+    font = ImageFont.truetype(
+        "Inconsolata.ttf",
+        int(150 * scale)
+    )
+    if text != None:
+        draw.text(
+            (
+                int(200 * scale),
+                int(3800 * scale)
+            ),
+            text,
+            "#706080",
+            font=font
+        )
     del draw
 
+    # Supersample
     im = im.resize(
         (
             int(base_x / 8),
