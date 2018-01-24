@@ -3,7 +3,7 @@ import requests
 from django.core.management.base import BaseCommand
 
 from sde.models import System
-from core.models import JumpsRecord
+from core.models import JumpsRecord, Sequence
 
 
 class Command(BaseCommand):
@@ -19,11 +19,14 @@ class Command(BaseCommand):
         for jump in results:
             jumps[jump['system_id']] = jump['ship_jumps']
 
+        sequence = Sequence()
+
         # Build db objects
         db_jumps = []
         total_jumps = 0
         for system in System.objects.filter(id__lt=31000000).all():
             jump = JumpsRecord(
+                sequence=sequence,
                 system=system
             )
             if system.id in jumps:
