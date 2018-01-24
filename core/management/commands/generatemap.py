@@ -18,7 +18,9 @@ class Command(BaseCommand):
         target = jump.origin.jumps.first().date - timedelta(seconds=10)
 
         run = True
+        i = 0
         while run:
+            i = i + 1
             jumps = SystemJump.objects.filter(
                 origin__jumps__date__range=[
                     target,
@@ -31,6 +33,7 @@ class Command(BaseCommand):
 
             if jumps.count() > 0:
                 filename = "map-%s.png" % target.strftime('%Y%m%d-%H%M')
+                filename = "map%05d.png" % i
                 print(
                     "Rendering file %s from %s datapoints..." % (
                         filename,
